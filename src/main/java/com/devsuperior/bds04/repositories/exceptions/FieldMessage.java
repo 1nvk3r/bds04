@@ -1,4 +1,4 @@
-package com.devsuperior.bds04.controllers.exceptions;
+package com.devsuperior.bds04.repositories.exceptions;
 
 public class FieldMessage {
 

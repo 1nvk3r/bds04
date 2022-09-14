@@ -1,4 +1,4 @@
-package com.devsuperior.bds04.controllers.exceptions;
+package com.devsuperior.bds04.repositories.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

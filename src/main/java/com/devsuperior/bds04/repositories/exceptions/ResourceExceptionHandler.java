@@ -1,4 +1,4 @@
-package com.devsuperior.bds04.controllers.exceptions;
+package com.devsuperior.bds04.repositories.exceptions;
 
 import com.devsuperior.bds04.services.exceptions.DatabaseException;
 import com.devsuperior.bds04.services.exceptions.ResourceNotFoundException;
