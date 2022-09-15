@@ -24,7 +24,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC = {"/oauth/token", "/h2-console/**"};
 
-    private static final String[] CLIENT_GET = {"/cities/**", "/events/**"};
+    private static final String[] CLIENT_OR_ADMIN = {"/cities/**", "/events/**"};
+
+    private static final String[] CLIENT = {"/events/**"};
 
     private static final String[] ADMIN = {"/users/**"};
 
@@ -43,7 +45,16 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
         .antMatchers(PUBLIC).permitAll()
-        .antMatchers(HttpMethod.GET, CLIENT_GET).permitAll().antMatchers(CLIENT_GET).hasAnyRole("CLIENT", "ADMIN")
-        .anyRequest().hasAnyRole("ADMIN");
+        .antMatchers(HttpMethod.GET, CLIENT_OR_ADMIN).permitAll()
+                .antMatchers(CLIENT_OR_ADMIN).hasAnyRole("CLIENT", "ADMIN");
+
+        http.authorizeRequests().antMatchers(HttpMethod.POST, CLIENT_OR_ADMIN).permitAll()
+                .antMatchers(CLIENT_OR_ADMIN).hasAnyRole( "ADMIN");
+
+        http.authorizeRequests().antMatchers(HttpMethod.POST, CLIENT).permitAll()
+                .antMatchers(CLIENT).hasAnyRole( "ADMIN", "CLIENT");
+
+        http.authorizeRequests().antMatchers(ADMIN).hasRole("ADMIN").anyRequest().authenticated();
+
     }
 }
